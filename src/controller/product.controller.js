@@ -1,26 +1,29 @@
 const Product = require("../model/product.model");
 const productHelper = require("../helper/product.helper");
 
-const addTimer = async (req, res) => {
+const addSmartPhone = async (req, res) => {
 	const newProduct = new Product({
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
-		origin: req.body.origin,
 		variants: req.body.variants,
 		moreAttribute: {
-			supplyTimer: req.body.supplyTimer,
-			switchContacts: req.body.switchContacts,
-			maximumLoadContact: req.body.maximumLoadContact,
-			programCapacity: req.body.programCapacity,
-			saveProgram: req.body.saveProgram,
-			batteryMemory: req.body.batteryMemory
+			screenTech: req.body.screenTech,
+			resolution: req.body.resolution,
+			screenSize: req.body.screenSize,
+			operatingSystem: req.body.operatingSystem,
+			processor: req.body.processor,
+			internalMemory: req.body.internalMemory,
+			ram: req.body.ram,
+			mobileNetwork: req.body.mobileNetwork,
+			simSlot: req.body.simSlot,
+			batteryCapacity: req.body.batteryCapacity
 		}
 	});
 	console.log(req.body.variants)
 	try {
 		await productHelper
-			.addTimer(newProduct)
+			.addProduct(newProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -32,60 +35,28 @@ const addTimer = async (req, res) => {
 	}
 };
 
-const editTimer = async (req, res) => {
-	console.log(req.body.image)
-	try {
-		const product = {
-			productID: req.params.productID,
-			productName: req.body.productName,
-			description: req.body.description,
-			category: req.body.category,
-			image: req.body.image,
-			color: req.body.color,
-			origin: req.body.origin,
-			moreAttribute: {
-				supplyTimer: req.body.supplyTimer,
-				switchContacts: req.body.switchContacts,
-				maximumLoadContact: req.body.maximumLoadContact,
-				programCapacity: req.body.programCapacity,
-				saveProgram: req.body.saveProgram,
-				batteryMemory: req.body.batteryMemory
-			}
-		};
-		await productHelper
-			.editTimer(product)
-			.then((result) => {
-				return res.status(200).json({ result: true, data: result });
-			})
-			.catch((error) => {
-				return res.status(500).json({ result: false, message: error });
-			});
-	} catch (error) {
-		return res.status(500).json({ result: false, message: error });
-	}
-};
-
-const addAmplifier = async (req, res) => {
+const addTablet = async (req, res) => {
 	const newProduct = new Product({
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
 		variants: req.body.variants,
-		origin: req.body.origin,
 		moreAttribute: {
-			channelInput: req.body.channelInput,
-			channelOutput: req.body.channelOutput,
-			amplifierClass: req.body.amplifierClass,
-			autoSwitching: req.body.autoSwitching,
-			autoAdjustVoltage: req.body.autoAdjustVoltage,
-			overallDimensions: req.body.overallDimensions,
-			weight: req.body.weight
+			screenTech: req.body.screenTech,
+			operatingSystem: req.body.operatingSystem,
+			processorChip: req.body.processorChip,
+			graphicsChip: req.body.graphicsChip, 
+			wifi: req.body.wifi,
+			bluetooth: req.body.bluetooth,
+			internalMemory: req.body.internalMemory,
+			ram: req.body.ram,
+			dimensionsNWeight: req.body.dimensionsNWeight
 		}
 	});
-	console.log(req.body)
+	console.log(req.body.variants)
 	try {
 		await productHelper
-			.addAmplifier(newProduct)
+			.addProduct(newProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -97,63 +68,24 @@ const addAmplifier = async (req, res) => {
 	}
 };
 
-const editAmplifier = async (req, res) => {
-	console.log(req.body.image)
-	try {
-		const product = {
-			productID: req.params.productID,
-			productName: req.body.productName,
-			description: req.body.description,
-			category: req.body.category,
-			image: req.body.image,
-			color: req.body.color,
-			origin: req.body.origin,
-			moreAttribute: {
-				channelInput: req.body.channelInput,
-				channelOutput: req.body.channelOutput,
-				amplifierClass: req.body.amplifierClass,
-				autoSwitching: req.body.autoSwitching,
-				autoAdjustVoltage: req.body.autoAdjustVoltage,
-				overallDimensions: req.body.overallDimensions,
-				weight: req.body.weight
-			}
-		};
-		await productHelper
-			.editAmplifier(product)
-			.then((result) => {
-				return res.status(200).json({ result: true, data: result });
-			})
-			.catch((error) => {
-				return res.status(500).json({ result: false, message: error });
-			});
-	} catch (error) {
-		return res.status(500).json({ result: false, message: error });
-	}
-};
-
-const addSpeaker = async (req, res) => {
+const addTV = async (req, res) => {
 	const newProduct = new Product({
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
-		origin: req.body.origin,
-		variants: data.body.variants,
+		variants: req.body.variants,
 		moreAttribute: {
-			frequencyResponse: req.body.frequencyResponse,
-			averageSensitivity: req.body.averageSensitivity,
-			maximumPowerHandlingCapacity: req.body.maximumPowerHandlingCapacity,
-			maximumVoltage: req.body.maximumVoltage,
-			overallDimensions: req.body.overallDimensions,
-			impedance: req.body.impedance,
-			maxHandlingCapacity: req.body.maxHandlingCapacity,
-			totalDriver: req.body.totalDriver,
-			material: req.body.material
+			resolution: req.body.resolution,
+			screenSize: req.body.screenSize,
+			productType: req.body.productType,
+			port: req.body.port,
+			weight: req.body.weight
 		}
 	});
-	console.log(req.body)
+	console.log(req.body.variants)
 	try {
 		await productHelper
-			.addSpeaker(newProduct)
+			.addProduct(newProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -165,32 +97,53 @@ const addSpeaker = async (req, res) => {
 	}
 };
 
-const editSpeaker = async (req, res) => {
-	console.log(req.body.image)
+const addLaptop = async (req, res) => {
+	const newProduct = new Product({
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		variants: req.body.variants,
+		moreAttribute: {
+			resolution: req.body.resolution,
+			cpuNumber: req.body.cpuNumber,
+			baseClock: req.body.baseClock,
+			dimensions: req.body.dimensions,
+			weight: req.body.weight,
+			ram: req.body.ram,
+			operatingSystem: req.body.operatingSystem,
+		}
+	});
+	console.log(req.body.variants)
 	try {
-		const product = {
-			productID: req.params.productID,
-			productName: req.body.productName,
-			description: req.body.description,
-			category: req.body.category,
-			image: req.body.image,
-			color: req.body.color,
-			origin: req.body.origin,
-			moreAttribute: {
-				wattage: req.body.wattage,
-				frequencyResponse: req.body.frequencyResponse,
-				averageSensitivity: req.body.averageSensitivity,
-				maximumPowerHandlingCapacity: req.body.maximumPowerHandlingCapacity,
-				maximumVoltage: req.body.maximumVoltage,
-				overallDimensions: req.body.overallDimensions,
-				impedance: req.body.impedance,
-				maxHandlingCapacity: req.body.maxHandlingCapacity,
-				totalDriver: req.body.totalDriver,
-				material: req.body.material
-			}
-		};
 		await productHelper
-			.editSpeaker(product)
+			.addProduct(newProduct)
+			.then((result) => {
+				return res.status(200).json({ result: true, data: result });
+			})
+			.catch((error) => {
+				return res.status(500).json({ result: false, message: error });
+			});
+	} catch (error) {
+		return res.status(500).json({ result: false, message: error });
+	}
+};
+
+const addWatch = async (req, res) => {
+	const newProduct = new Product({
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		variants: req.body.variants,
+		moreAttribute: {
+			screenSize: req.body.screenSize,
+			weight: req.body.weight,
+			batteryCapacity: req.body.batteryCapacity
+		}
+	});
+	console.log(req.body.variants)
+	try {
+		await productHelper
+			.addProduct(newProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -283,12 +236,11 @@ const searchProducts = async (req, res) => {
 };
 
 module.exports = {
-	addTimer: addTimer,
-	editTimer: editTimer,
-	addSpeaker: addSpeaker,
-	editSpeaker: editSpeaker,
-	addAmplifier: addAmplifier,
-	editAmplifier: editAmplifier,
+	addSmartPhone: addSmartPhone,
+	addTablet: addTablet,
+	addTV: addTV,
+	addLaptop: addLaptop,
+	addWatch: addWatch,
 	deleteProduct: deleteProduct,
 	findAll: findAll,
 	findProduct: findProduct,

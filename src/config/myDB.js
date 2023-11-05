@@ -5,7 +5,7 @@ const connectionParams = {
   useUnifiedTopology: true,
 };
 
-const url = "mongodb+srv://nhayenthanthiAdmin:nhayenthanthiAdmin@cluster0.7ht7axz.mongodb.net/my_Project?retryWrites=true&w=majority";
+const url = "mongodb+srv://nguyenvo709it:0944778511Quan@cluster0.igmpceb.mongodb.net/?retryWrites=true&w=majority";
 
 const connectDB = () => {
   mongoose

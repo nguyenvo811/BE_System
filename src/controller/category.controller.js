@@ -4,7 +4,8 @@ const categoryHelper = require("../helper/category.helper");
 const addCategory = async (req, res) => {
   const newData = new Category({
     categoryName: req.body.categoryName,
-    description: req.body.description
+    description: req.body.description,
+    parentId: req.body.parentId
   });
   console.log(req.user)
   try {
@@ -27,6 +28,7 @@ const editCategory = async (req, res) => {
       categoryID: req.params.categoryID,
       categoryName: req.body.categoryName,
       description: req.body.description,
+      parentId: req.body.parentId
     };
     await categoryHelper
       .editCategory(category)

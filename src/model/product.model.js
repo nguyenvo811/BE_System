@@ -10,13 +10,14 @@ const productSchema = new mongoose.Schema({
 		ref: "Category",
 		required: true
 	},
-	origin: { type: String, required: true },
 	variants: [{
 		color: String,
 		images: [String],
-		price: String,
-		quantity: String,
-		moreVariants: {}
+		moreVariants: [{
+			version: String,
+			price: String,
+			quantity: String,
+		}]
 	}],
 	moreAttribute: {}
 }, { timestamps: true });

@@ -1,10 +1,10 @@
 const Product = require("../model/product.model");
 
-const addTimer = (data) => {
+const addProduct = (data) => {
 	return new Promise(async (resolve, reject) => {
-		const findTimer = await Product.findOne({ productName: data.productName });
+		const findProduct = await Product.findOne({ productName: data.productName });
 		console.log(data)
-		if (findTimer) {
+		if (findProduct) {
 			console.log("Sản phẩm đã tồn tại!");
 			return reject("Sản phẩm đã tồn tại");
 		} else {
@@ -28,241 +28,6 @@ const addTimer = (data) => {
 		}
 	})
 }
-
-const editTimer = (data) => {
-	return new Promise(async (resolve, reject) => {
-		const findProduct = await Product.findById(data.productID).populate('category');
-		if (findProduct) {
-			if (data.image.length > 0) {
-				const newImg = data.image
-				await Product
-					.findByIdAndUpdate(findProduct, {
-						$set: {
-							productName: data.productName,
-							description: data.description,
-							category: data.category,
-							color: data.color,
-							origin: data.origin,
-							moreAttribute: data.moreAttribute,
-							image: newImg
-						},
-					}, {
-						new: true,
-						upsert: true,
-						rawResult: true
-					})
-					.then((res) => {
-						return resolve(res);
-					})
-					.catch((error) => {
-						console.error(JSON.stringify(error));
-						return reject(error);
-					});
-			} else {
-				await Product
-					.findByIdAndUpdate(findProduct, {
-						$set: {
-							productName: data.productName,
-							description: data.description,
-							category: data.category,
-							color: data.color,
-							origin: data.origin,
-							moreAttribute: data.moreAttribute,
-						},
-					}, {
-						new: true,
-						upsert: true,
-						rawResult: true
-					})
-					.then((res) => {
-						return resolve(res);
-					})
-					.catch((error) => {
-						console.error(JSON.stringify(error));
-						return reject(error);
-					});
-			}
-		} else {
-			return reject("Sản phẩm không tồn tại!");
-		}
-	});
-};
-
-const addSpeaker = (data) => {
-	return new Promise(async (resolve, reject) => {
-		const findTimer = await Product.findOne({ productName: data.productName });
-		if (findTimer) {
-			console.log("Sản phẩm đã tồn tại!");
-			return reject("Sản phẩm đã tồn tại");
-		} else {
-			const newData = {
-				productName: data.productName,
-				description: data.description,
-				category: data.category,
-				variants: data.variants,
-				origin: data.origin,
-				moreAttribute: data.moreAttribute
-			};
-			console.log(newData)
-			await Product(newData)
-				.save()
-				.then((res) => {
-					return resolve(res);
-				})
-				.catch((error) => {
-					return reject(error);
-				}
-				);
-		}
-	})
-}
-
-const editSpeaker = (data) => {
-	return new Promise(async (resolve, reject) => {
-		const findProduct = await Product.findById(data.productID).populate('category');
-		if (findProduct) {
-			if (data.image.length > 0) {
-				const newImg = data.image
-				await Product
-					.findByIdAndUpdate(findProduct, {
-						$set: {
-							productName: data.productName,
-							description: data.description,
-							category: data.category,
-							color: data.color,
-							origin: data.origin,
-							moreAttribute: data.moreAttribute,
-							image: newImg
-						},
-					}, {
-						new: true,
-						upsert: true,
-						rawResult: true
-					})
-					.then((res) => {
-						return resolve(res);
-					})
-					.catch((error) => {
-						console.error(JSON.stringify(error));
-						return reject(error);
-					});
-			} else {
-				await Product
-					.findByIdAndUpdate(findProduct, {
-						$set: {
-							productName: data.productName,
-							description: data.description,
-							category: data.category,
-							color: data.color,
-							origin: data.origin,
-							moreAttribute: data.moreAttribute,
-						},
-					}, {
-						new: true,
-						upsert: true,
-						rawResult: true
-					})
-					.then((res) => {
-						return resolve(res);
-					})
-					.catch((error) => {
-						console.error(JSON.stringify(error));
-						return reject(error);
-					});
-			}
-		} else {
-			return reject("Sản phẩm không tồn tại!");
-		}
-	});
-};
-
-const addAmplifier = (data) => {
-	return new Promise(async (resolve, reject) => {
-		const findTimer = await Product.findOne({ productName: data.productName });
-		if (findTimer) {
-			console.log("Sản phẩm đã tồn tại!");
-			return reject("Sản phẩm đã tồn tại");
-		} else {
-			const newData = {
-				productName: data.productName,
-				description: data.description,
-				category: data.category,
-				variants: data.variants,
-				origin: data.origin,
-				moreAttribute: data.moreAttribute
-			};
-			console.log(newData)
-			await Product(newData)
-				.save()
-				.then((res) => {
-					return resolve(res);
-				})
-				.catch((error) => {
-					return reject(error);
-				}
-				);
-		}
-	})
-}
-
-const editAmplifier = (data) => {
-	return new Promise(async (resolve, reject) => {
-		const findProduct = await Product.findById(data.productID).populate('category');
-		if (findProduct) {
-			if (data.image.length > 0) {
-				const newImg = data.image
-				await Product
-					.findByIdAndUpdate(findProduct, {
-						$set: {
-							productName: data.productName,
-							description: data.description,
-							category: data.category,
-							color: data.color,
-							origin: data.origin,
-							moreAttribute: data.moreAttribute,
-							image: newImg
-						},
-					}, {
-						new: true,
-						upsert: true,
-						rawResult: true
-					})
-					.then((res) => {
-						return resolve(res);
-					})
-					.catch((error) => {
-						console.error(JSON.stringify(error));
-						return reject(error);
-					});
-			} else {
-				await Product
-					.findByIdAndUpdate(findProduct, {
-						$set: {
-							productName: data.productName,
-							description: data.description,
-							category: data.category,
-							color: data.color,
-							origin: data.origin,
-							moreAttribute: data.moreAttribute,
-						},
-					}, {
-						new: true,
-						upsert: true,
-						rawResult: true
-					})
-					.then((res) => {
-						return resolve(res);
-					})
-					.catch((error) => {
-						console.error(JSON.stringify(error));
-						return reject(error);
-					});
-			}
-		} else {
-			return reject("Sản phẩm không tồn tại!");
-		}
-	});
-};
 
 const deleteProduct = (productID) => {
 	return new Promise(async (resolve, reject) => {
@@ -320,13 +85,9 @@ const searchProducts = (search) => {
 	})
 }
 
+
 module.exports = {
-	addTimer: addTimer,
-	editTimer: editTimer,
-	addSpeaker: addSpeaker,
-	editSpeaker: editSpeaker,
-	addAmplifier: addAmplifier,
-	editAmplifier: editAmplifier,
+	addProduct: addProduct,
 	deleteProduct: deleteProduct,
 	findAll: findAll,
 	findProduct: findProduct,
