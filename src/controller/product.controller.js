@@ -6,6 +6,8 @@ const addSmartPhone = async (req, res) => {
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
 		variants: req.body.variants,
 		moreAttribute: {
 			screenTech: req.body.screenTech,
@@ -40,6 +42,8 @@ const addTablet = async (req, res) => {
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
 		variants: req.body.variants,
 		moreAttribute: {
 			screenTech: req.body.screenTech,
@@ -73,6 +77,8 @@ const addTV = async (req, res) => {
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
 		variants: req.body.variants,
 		moreAttribute: {
 			resolution: req.body.resolution,
@@ -102,6 +108,8 @@ const addLaptop = async (req, res) => {
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
 		variants: req.body.variants,
 		moreAttribute: {
 			resolution: req.body.resolution,
@@ -133,6 +141,8 @@ const addWatch = async (req, res) => {
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
 		variants: req.body.variants,
 		moreAttribute: {
 			screenSize: req.body.screenSize,

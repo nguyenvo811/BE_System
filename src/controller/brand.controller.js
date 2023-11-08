@@ -1,15 +1,15 @@
-const Category = require("../model/category.model");
-const categoryHelper = require("../helper/category.helper");
+const Brand = require("../model/brand.model");
+const brandHelper = require("../helper/brand.helper");
 
-const addCategory = async (req, res) => {
-  const newData = new Category({
-    categoryName: req.body.categoryName,
-    description: req.body.description
+const addBrand = async (req, res) => {
+  const newData = new Brand({
+    brandName: req.body.brandName,
+    description: req.body.description,
+    variants: req.body.variants
   });
-  console.log(req.user)
   try {
-    await categoryHelper
-      .addCategory(newData)
+    await brandHelper
+      .addBrand(newData)
       .then((result) => {
         return res.status(200).json({ result: true, data: result });
       })
@@ -21,15 +21,17 @@ const addCategory = async (req, res) => {
   }
 };
 
-const editCategory = async (req, res) => {
+const editBrand = async (req, res) => {
   try {
-    const category = {
-      categoryID: req.params.categoryID,
-      categoryName: req.body.categoryName,
-      description: req.body.description
+    const data = {
+      brandID: req.params.brandID,
+      brandName: req.body.brandName,
+      description: req.body.description,
+      variants: req.body.variants
     };
-    await categoryHelper
-      .editCategory(category)
+    console.log(data)
+    await brandHelper
+      .editBrand(data)
       .then((result) => {
         return res.status(200).json({ result: true, data: result });
       })
@@ -43,7 +45,7 @@ const editCategory = async (req, res) => {
 
 const findAll = async (req, res) => {
   try {
-    await categoryHelper
+    await brandHelper
       .findAll()
       .then((result) => {
         return res.status(200).json({ result: true, data: result });
@@ -56,11 +58,11 @@ const findAll = async (req, res) => {
   }
 };
 
-const findCategory = async (req, res) => {
-  const categoryID = req.params.categoryID;
+const findBrand = async (req, res) => {
+  const brandID = req.params.brandID;
   try {
-    await categoryHelper
-      .findCategory(categoryID)
+    await brandHelper
+      .findBrand(brandID)
       .then((result) => {
         return res.status(200).json({ result: true, data: result });
       })
@@ -72,11 +74,11 @@ const findCategory = async (req, res) => {
   }
 };
 
-const deleteCategory = async (req, res) => {
-  const categoryID = req.params.categoryID;
+const deleteBrand = async (req, res) => {
+  const brandID = req.params.brandID;
   try {
-    await categoryHelper
-      .deleteCategory(categoryID)
+    await brandHelper
+      .deleteBrand(brandID)
       .then((result) => {
         return res.status(200).json({ result: true, data: result });
       })
@@ -89,9 +91,9 @@ const deleteCategory = async (req, res) => {
 };
 
 module.exports = {
-  addCategory: addCategory,
-  editCategory: editCategory,
+  addBrand: addBrand,
+  editBrand: editBrand,
   findAll: findAll,
-  deleteCategory: deleteCategory,
-  findCategory: findCategory
+  deleteBrand: deleteBrand,
+  findBrand: findBrand
 };

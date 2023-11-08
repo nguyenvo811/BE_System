@@ -12,7 +12,8 @@ const addProduct = (data) => {
 				productName: data.productName,
 				description: data.description,
 				category: data.category,
-				origin: data.origin,
+				brand: req.body.brand,
+				productBrand: req.body.productBrand,
 				variants: data.variants,
 				moreAttribute: data.moreAttribute
 			};

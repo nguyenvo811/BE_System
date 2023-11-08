@@ -10,7 +10,6 @@ const addCategory = (data) => {
 			const newData = {
 				categoryName: data.categoryName,
 				description: data.description,
-				parentId: data.parentId
 			}
 			await Category(newData)
 				.save()
@@ -34,7 +33,6 @@ const editCategory = (data) => {
 					$set: {
 						categoryName: data.categoryName,
 						description: data.description,
-						parentId: data.parentId
 					},
 				}, {
 					new: true,
@@ -56,7 +54,7 @@ const editCategory = (data) => {
 
 const findAll = () => {
 	return new Promise(async (resolve, reject) => {
-		const findCategory = await Category.find().populate('parentId', 'categoryName');
+		const findCategory = await Category.find();
 		if (findCategory) {
 			return resolve(findCategory);
 		} else {

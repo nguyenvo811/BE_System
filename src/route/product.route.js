@@ -13,6 +13,7 @@ router.post("/products/tablets/add-tablet", requiredSignIn, isStaff, Product.add
 // router.post("/products/amplifiers/:productID", requiredSignIn, isStaff, Product.editAmplifier);
 router.delete("/products/:productID", requiredSignIn, verifyToken, Product.deleteProduct);
 router.get("/products", requiredSignIn, isStaff, Product.findAll);
+router.get("/home/products", Product.findAll);
 router.get("/products/:productID", Product.findProduct);
 router.get("/products/products-category/:categoryID", Product.findProductByCategory);
 router.get("/search-products", Product.searchProducts);
