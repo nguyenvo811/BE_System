@@ -12,8 +12,8 @@ const addProduct = (data) => {
 				productName: data.productName,
 				description: data.description,
 				category: data.category,
-				brand: req.body.brand,
-				productBrand: req.body.productBrand,
+				brand: data.brand,
+				productBrand: data.productBrand,
 				variants: data.variants,
 				moreAttribute: data.moreAttribute
 			};
@@ -43,7 +43,7 @@ const deleteProduct = (productID) => {
 
 const findAll = () => {
 	return new Promise(async (resolve, reject) => {
-	  const findProduct = await Product.find().populate('category', 'categoryName');
+	  const findProduct = await Product.find().populate('category', 'categoryName').populate('brand', 'brandName').populate('productBrand', 'name');
 	  if (findProduct) {
 		return resolve(findProduct);
 	  } else {
@@ -54,7 +54,7 @@ const findAll = () => {
 
 const findProduct = (productID) => {
 	return new Promise(async (resolve, reject) => {
-		const findProduct = await Product.findById(productID).populate('category', 'categoryName');
+		const findProduct = await Product.findById(productID).populate('category', 'categoryName').populate('brand', 'brandName').populate('productBrand', 'name');
 		if (findProduct) {
 			return resolve(findProduct);
 		} else {
@@ -65,7 +65,7 @@ const findProduct = (productID) => {
 
 const findProductByCategory = (categoryID) => {
 	return new Promise(async (resolve, reject) => {
-		const filtering = await Product.find({ category: categoryID }).populate("category", "categoryName")
+		const filtering = await Product.find({ category: categoryID }).populate("category", "categoryName").populate('brand', 'brandName').populate('productBrand', 'name');
 		if (filtering) {
 			return resolve(filtering);
 		} else {
