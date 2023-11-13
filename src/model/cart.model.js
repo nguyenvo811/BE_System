@@ -14,6 +14,8 @@ const cartSchema = new mongoose.Schema({
             ref: "Product",
             required: true
         },
+        color: { type: String},
+        version: { type: String},
         quantity: { type: Number, required: true, min: 1 }
     }],
     totalPrice: { type: Number },

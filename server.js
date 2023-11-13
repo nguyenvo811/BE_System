@@ -13,6 +13,10 @@ const userRoute = require("./src/route/user.route");
 const categoryRoute = require("./src/route/category.route");
 const productRoute = require("./src/route/product.route");
 const brandRoute = require("./src/route/brand.route");
+const commentRoute = require("./src/route/comment.route");
+const wishListRoute = require("./src/route/wishList.route");
+const cartRoute = require("./src/route/cart.route");
+const orderRoute = require("./src/route/order.route");
 
 // parse requests of content-type - application/json
 const corsOptions = {
@@ -31,7 +35,7 @@ app.set("view engine", "ejs");
 
 connectDB();
 
-app.use(userRoute, categoryRoute, productRoute, brandRoute);
+app.use(userRoute, categoryRoute, productRoute, brandRoute, commentRoute, wishListRoute, cartRoute, orderRoute);
 app.use(userModel);
 
 

@@ -7,6 +7,7 @@ const orderSchema = new mongoose.Schema({
         ref: "User",
         required: true
     },
+    username: { type: String, required: true },
     shippingAddress: { type: String, required:true },
     phoneNumber: { type: String, required: true },
     note: { type: String, required:true },
@@ -16,13 +17,15 @@ const orderSchema = new mongoose.Schema({
             ref: "Product",
             required: true
         },
+        color: { type: String },
+        version: { type: String },
         quantity: { type: Number }
     }],
     totalPrice: { type: Number },
     status: { 
         type: String,
-        enum: ['Pending', 'Processing', 'Shipped', "Delivered", "Refunded"],
-        default: "Preparing"
+        enum: ['Pending', 'Processing', 'Shipped', "Delivered"],
+        default: "Pending"
     }
     
 }, {timestamps: true});

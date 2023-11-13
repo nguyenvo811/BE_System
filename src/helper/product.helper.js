@@ -1,4 +1,5 @@
 const Product = require("../model/product.model");
+const Comment = require("../model/comment.model");
 
 const addProduct = (data) => {
 	return new Promise(async (resolve, reject) => {
@@ -44,8 +45,10 @@ const deleteProduct = (productID) => {
 const findAll = () => {
 	return new Promise(async (resolve, reject) => {
 	  const findProduct = await Product.find().populate('category', 'categoryName').populate('brand', 'brandName').populate('productBrand', 'name');
+	  const findRating = findProduct.map(p => p._id.toString())
+	  const findComment = await Comment.find({product: findRating});
 	  if (findProduct) {
-		return resolve(findProduct);
+		return resolve({findProduct, findComment});
 	  } else {
 		return reject("Kho dữ liệu trống!");
 	  }
@@ -55,8 +58,9 @@ const findAll = () => {
 const findProduct = (productID) => {
 	return new Promise(async (resolve, reject) => {
 		const findProduct = await Product.findById(productID).populate('category', 'categoryName').populate('brand', 'brandName').populate('productBrand', 'name');
+		const findComment = await Comment.find({product: productID}).populate('commentList.user');
 		if (findProduct) {
-			return resolve(findProduct);
+			return resolve({findProduct, findComment});
 		} else {
 			return reject("Kho dữ liệu trống!");
 		}
@@ -66,8 +70,10 @@ const findProduct = (productID) => {
 const findProductByCategory = (categoryID) => {
 	return new Promise(async (resolve, reject) => {
 		const filtering = await Product.find({ category: categoryID }).populate("category", "categoryName").populate('brand', 'brandName').populate('productBrand', 'name');
+		const findRating = filtering.map(p => p._id.toString())
+		const findComment = await Comment.find({product: findRating});
 		if (filtering) {
-			return resolve(filtering);
+			return resolve({filtering, findComment});
 		} else {
 			return reject("Sản phẩm không tồn tại!");
 		}
@@ -77,9 +83,11 @@ const findProductByCategory = (categoryID) => {
 const searchProducts = (search) => {
 	return new Promise(async (resolve, reject) => {
 		const searching = await Product.find({ "productName": { $regex: ".*" + search + ".*", $options: "i" } })
+		const findRating = searching.map(p => p._id.toString())
+		const findComment = await Comment.find({product: findRating});
 		console.log(searching)
 		if (searching.length > 0) {
-			return resolve(searching);
+			return resolve({searching, findComment});
 		} else {
 			return reject("Không tìm thấy sản phẩm!");
 		}
