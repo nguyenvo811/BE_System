@@ -37,6 +37,43 @@ const addSmartPhone = async (req, res) => {
 	}
 };
 
+const updateSmartPhone = async (req, res) => {
+	const newProduct = new Product({
+		productID: req.body.productID,
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
+		variants: req.body.variants,
+		moreAttribute: {
+			screenTech: req.body.screenTech,
+			resolution: req.body.resolution,
+			screenSize: req.body.screenSize,
+			operatingSystem: req.body.operatingSystem,
+			processor: req.body.processor,
+			internalMemory: req.body.internalMemory,
+			ram: req.body.ram,
+			mobileNetwork: req.body.mobileNetwork,
+			simSlot: req.body.simSlot,
+			batteryCapacity: req.body.batteryCapacity
+		}
+	});
+	console.log(req.body.variants)
+	try {
+		await productHelper
+			.updateProduct(newProduct)
+			.then((result) => {
+				return res.status(200).json({ result: true, data: result });
+			})
+			.catch((error) => {
+				return res.status(500).json({ result: false, message: error });
+			});
+	} catch (error) {
+		return res.status(500).json({ result: false, message: error });
+	}
+};
+
 const addTablet = async (req, res) => {
 	const newProduct = new Product({
 		productName: req.body.productName,
@@ -255,5 +292,6 @@ module.exports = {
 	findAll: findAll,
 	findProduct: findProduct,
 	findProductByCategory: findProductByCategory,
-	searchProducts: searchProducts
+	searchProducts: searchProducts,
+	updateSmartPhone: updateSmartPhone
 };

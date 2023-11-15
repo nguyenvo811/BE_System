@@ -31,6 +31,40 @@ const addProduct = (data) => {
 	})
 }
 
+const updateProduct = (data) => {
+	return new Promise(async (resolve, reject) => {
+		const findProduct = await Product.findById(data.productID).populate('category');
+
+		if (findProduct) {
+			await Product
+				.findByIdAndUpdate(findProduct, {
+					$set: {
+						productID: data.productID,
+						productName: data.productName,
+						description: data.description,
+						category: data.category,
+						brand: data.brand,
+						productBrand: data.productBrand,
+						variants: data.variants,
+					},
+				}, {
+					new: true,
+					upsert: true,
+					rawResult: true
+				})
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((error) => {
+					console.error(JSON.stringify(error));
+					return reject(error);
+				});
+		} else {
+			return reject("Sản phẩm không tồn tại!");
+		}
+	});
+};
+
 const deleteProduct = (productID) => {
 	return new Promise(async (resolve, reject) => {
 		const findProduct = await Product.findByIdAndDelete(productID);
@@ -101,5 +135,6 @@ module.exports = {
 	findAll: findAll,
 	findProduct: findProduct,
 	findProductByCategory: findProductByCategory,
-	searchProducts: searchProducts
+	searchProducts: searchProducts,
+	updateProduct: updateProduct
 };

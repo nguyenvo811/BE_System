@@ -10,6 +10,7 @@ router.post("/products/televisions/add-television", requiredSignIn, isStaff, Pro
 router.post("/products/tablets/add-tablet", requiredSignIn, isStaff, Product.addTablet);
 router.delete("/products/:productID", requiredSignIn, verifyToken, Product.deleteProduct);
 router.get("/products", requiredSignIn, isStaff, Product.findAll);
+router.patch("/products/smart-phones/:productID", requiredSignIn, isStaff, Product.updateSmartPhone);
 
 router.get("/home/products", Product.findAll);
 router.get("/home/products/:productID", Product.findProduct);
