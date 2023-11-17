@@ -34,12 +34,11 @@ const addProduct = (data) => {
 const updateProduct = (data) => {
 	return new Promise(async (resolve, reject) => {
 		const findProduct = await Product.findById(data.productID).populate('category');
-
+		console.log(findProduct)
 		if (findProduct) {
 			await Product
 				.findByIdAndUpdate(findProduct, {
 					$set: {
-						productID: data.productID,
 						productName: data.productName,
 						description: data.description,
 						category: data.category,

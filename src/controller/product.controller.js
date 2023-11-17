@@ -38,8 +38,8 @@ const addSmartPhone = async (req, res) => {
 };
 
 const updateSmartPhone = async (req, res) => {
-	const newProduct = new Product({
-		productID: req.body.productID,
+	const newProduct = {
+		productID: req.params.productID,
 		productName: req.body.productName,
 		description: req.body.description,
 		category: req.body.category,
@@ -58,8 +58,8 @@ const updateSmartPhone = async (req, res) => {
 			simSlot: req.body.simSlot,
 			batteryCapacity: req.body.batteryCapacity
 		}
-	});
-	console.log(req.body.variants)
+	};
+	console.log(req.params)
 	try {
 		await productHelper
 			.updateProduct(newProduct)
@@ -109,6 +109,42 @@ const addTablet = async (req, res) => {
 	}
 };
 
+const updateTablet = async (req, res) => {
+	const newProduct = {
+		productID: req.params.productID,
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
+		variants: req.body.variants,
+		moreAttribute: {
+			screenTech: req.body.screenTech,
+			operatingSystem: req.body.operatingSystem,
+			processorChip: req.body.processorChip,
+			graphicsChip: req.body.graphicsChip, 
+			wifi: req.body.wifi,
+			bluetooth: req.body.bluetooth,
+			internalMemory: req.body.internalMemory,
+			ram: req.body.ram,
+			dimensionsNWeight: req.body.dimensionsNWeight
+		}
+	};
+	console.log(req.params)
+	try {
+		await productHelper
+			.updateProduct(newProduct)
+			.then((result) => {
+				return res.status(200).json({ result: true, data: result });
+			})
+			.catch((error) => {
+				return res.status(500).json({ result: false, message: error });
+			});
+	} catch (error) {
+		return res.status(500).json({ result: false, message: error });
+	}
+};
+
 const addTV = async (req, res) => {
 	const newProduct = new Product({
 		productName: req.body.productName,
@@ -129,6 +165,38 @@ const addTV = async (req, res) => {
 	try {
 		await productHelper
 			.addProduct(newProduct)
+			.then((result) => {
+				return res.status(200).json({ result: true, data: result });
+			})
+			.catch((error) => {
+				return res.status(500).json({ result: false, message: error });
+			});
+	} catch (error) {
+		return res.status(500).json({ result: false, message: error });
+	}
+};
+
+const updateTV = async (req, res) => {
+	const newProduct = {
+		productID: req.params.productID,
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
+		variants: req.body.variants,
+		moreAttribute: {
+			resolution: req.body.resolution,
+			screenSize: req.body.screenSize,
+			productType: req.body.productType,
+			port: req.body.port,
+			weight: req.body.weight
+		}
+	};
+	console.log(req.params)
+	try {
+		await productHelper
+			.updateProduct(newProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -173,6 +241,40 @@ const addLaptop = async (req, res) => {
 	}
 };
 
+const updateLaptop = async (req, res) => {
+	const newProduct = {
+		productID: req.params.productID,
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
+		variants: req.body.variants,
+		moreAttribute: {
+			resolution: req.body.resolution,
+			cpuNumber: req.body.cpuNumber,
+			baseClock: req.body.baseClock,
+			dimensions: req.body.dimensions,
+			weight: req.body.weight,
+			ram: req.body.ram,
+			operatingSystem: req.body.operatingSystem,
+		}
+	};
+	console.log(req.params)
+	try {
+		await productHelper
+			.updateProduct(newProduct)
+			.then((result) => {
+				return res.status(200).json({ result: true, data: result });
+			})
+			.catch((error) => {
+				return res.status(500).json({ result: false, message: error });
+			});
+	} catch (error) {
+		return res.status(500).json({ result: false, message: error });
+	}
+};
+
 const addWatch = async (req, res) => {
 	const newProduct = new Product({
 		productName: req.body.productName,
@@ -191,6 +293,36 @@ const addWatch = async (req, res) => {
 	try {
 		await productHelper
 			.addProduct(newProduct)
+			.then((result) => {
+				return res.status(200).json({ result: true, data: result });
+			})
+			.catch((error) => {
+				return res.status(500).json({ result: false, message: error });
+			});
+	} catch (error) {
+		return res.status(500).json({ result: false, message: error });
+	}
+};
+
+const updateWatch = async (req, res) => {
+	const newProduct = {
+		productID: req.params.productID,
+		productName: req.body.productName,
+		description: req.body.description,
+		category: req.body.category,
+		brand: req.body.brand,
+		productBrand: req.body.productBrand,
+		variants: req.body.variants,
+		moreAttribute: {
+			screenSize: req.body.screenSize,
+			weight: req.body.weight,
+			batteryCapacity: req.body.batteryCapacity
+		}
+	};
+	console.log(req.params)
+	try {
+		await productHelper
+			.updateProduct(newProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -293,5 +425,9 @@ module.exports = {
 	findProduct: findProduct,
 	findProductByCategory: findProductByCategory,
 	searchProducts: searchProducts,
-	updateSmartPhone: updateSmartPhone
+	updateSmartPhone: updateSmartPhone,
+	updateTablet: updateTablet,
+	updateLaptop: updateLaptop,
+	updateTV: updateTV,
+	updateWatch: updateWatch,
 };
