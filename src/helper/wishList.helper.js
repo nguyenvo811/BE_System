@@ -12,14 +12,15 @@ const createWishlist = (data) => {
             findWishList = new WishList(newData);
         } 
         else {
-            const findItem = findWishList.wishListItem.find(p => p.product._id == data.wishListItem.product);
-                // console.log("asdsad",findItem)
-                // console.log("inf: ", data)
+						const findItem = findWishList.wishListItem.find(item => item.product._id == data.wishListItem.product &&
+							item.color == data.wishListItem.color && item.version == data.wishListItem.version)
             if (findItem) {
                 WishList.updateOne({user: data.user}, {
                     $pull: {
                         wishListItem: {
-                            product: data.wishListItem.product
+                            product: data.wishListItem.product,
+														color: data.wishListItem.color,
+														version: data.wishListItem.version
                         }
                     }
                 }, {upsert:true})
@@ -28,6 +29,8 @@ const createWishlist = (data) => {
             } else {
                 findWishList.wishListItem.push({
                     product: data.wishListItem.product,
+										color: data.wishListItem.color,
+										version: data.wishListItem.version,
                     isLiked: data.wishListItem.isLiked
                 }); 
             }
@@ -49,16 +52,18 @@ const viewWishList = (user) => {
     });
 };
 
-const deleteProduct = (user, product) => {
+const deleteProduct = (data) => {
     return new Promise(async (resolve, reject) => {
-        let findWishList = await WishList.findOne({user: user})
+        let findWishList = await WishList.findOne({user: data.user})
         if (findWishList) {
-            const findItem = findWishList.wishListItem.find(p => p.product);
+					const findItem = findWishList.wishListItem.find(p => p.product._id.toString() === data.product && p.color === data.color && p.version === data.version);
             if (findItem) {
-                WishList.updateOne({user: user}, {
+                WishList.updateOne({user: data.user}, {
                     $pull: {
                         wishListItem: {
-                            product: product
+                            product: data.product,
+														color: data.color,
+														version: data.version
                         }
                     }
                 }, {upsert:true})
@@ -75,5 +80,4 @@ module.exports = {
     createWishlist: createWishlist,
     viewWishList: viewWishList,
     deleteProduct: deleteProduct,
-    // deleteCart: deleteCart
 };

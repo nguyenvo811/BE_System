@@ -6,6 +6,8 @@ const createWishlist = async (req, res) => {
         user: req.user,
         wishListItem: {
             product: req.body.product,
+            color: req.body.color,
+            version: req.body.version,
             isLiked: req.body.isLiked
         }
     }
@@ -43,11 +45,16 @@ const viewWishList = async (req, res) => {
 };
 
 const deleteProduct = async (req, res) => {
-    const userID = req.user;
-    const productID = req.body.product;
+    const data = {
+        user: req.user,
+        product: req.body.product,
+        color: req.body.color,
+        version: req.body.version,
+    }
+    console.log(data)
     try {
         await wishListHelper
-            .deleteProduct(userID, productID)
+            .deleteProduct(data)
             .then((result) => {
                 return res.status(200).json({ result: true, data: result });
             })

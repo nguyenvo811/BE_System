@@ -102,7 +102,7 @@ const findProduct = (productID) => {
 
 const findProductByCategory = (categoryID) => {
 	return new Promise(async (resolve, reject) => {
-		const filtering = await Product.find({ category: categoryID }).populate("category", "categoryName").populate('brand', 'brandName').populate('productBrand', 'name');
+		const filtering = await Product.find({ category: categoryID }).populate("category", "categoryName").populate('brand', 'brandName').populate('productBrand', 'variants.name');
 		const findRating = filtering.map(p => p._id.toString())
 		const findComment = await Comment.find({product: findRating});
 		if (filtering) {

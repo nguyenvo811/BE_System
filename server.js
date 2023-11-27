@@ -38,8 +38,6 @@ connectDB();
 app.use(userRoute, categoryRoute, productRoute, brandRoute, commentRoute, wishListRoute, cartRoute, orderRoute);
 app.use(userModel);
 
-
-
 // set port, listen for requests
 app.listen(port, () => {
 	console.log("Server on port: " + port);
