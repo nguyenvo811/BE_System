@@ -38,7 +38,7 @@ const addSmartPhone = async (req, res) => {
 };
 
 const updateSmartPhone = async (req, res) => {
-	const newProduct = {
+	const updateProduct = {
 		productID: req.params.productID,
 		productName: req.body.productName,
 		description: req.body.description,
@@ -59,10 +59,10 @@ const updateSmartPhone = async (req, res) => {
 			batteryCapacity: req.body.batteryCapacity
 		}
 	};
-	console.log(req.params)
+	console.log("data", updateProduct)
 	try {
 		await productHelper
-			.updateProduct(newProduct)
+			.updateProduct(updateProduct)
 			.then((result) => {
 				return res.status(200).json({ result: true, data: result });
 			})
@@ -260,7 +260,7 @@ const updateLaptop = async (req, res) => {
 			operatingSystem: req.body.operatingSystem,
 		}
 	};
-	console.log(req.params)
+	console.log(newProduct)
 	try {
 		await productHelper
 			.updateProduct(newProduct)

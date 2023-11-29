@@ -45,6 +45,7 @@ const updateProduct = (data) => {
 						brand: data.brand,
 						productBrand: data.productBrand,
 						variants: data.variants,
+						moreAttribute: data.moreAttribute
 					},
 				}, {
 					new: true,
