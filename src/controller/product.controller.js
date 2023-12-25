@@ -319,7 +319,7 @@ const updateWatch = async (req, res) => {
 			batteryCapacity: req.body.batteryCapacity
 		}
 	};
-	console.log(req.params)
+	console.log(newProduct)
 	try {
 		await productHelper
 			.updateProduct(newProduct)

@@ -42,6 +42,23 @@ const viewOrders = async (req, res) => {
     }
 };
 
+const viewOrderDetail = async (req, res) => {
+		const orderID = req.params.orderID;
+		console.log(orderID)
+    try {
+        await orderHelper
+            .viewOrderDetail(orderID)
+            .then((result) => {
+                return res.status(200).json({ result: true, data: result });
+            })
+            .catch((error) => {
+                return res.status(500).json({ result: false, message: error });
+            });
+    } catch (error) {
+        return res.status(500).json({ result: false, message: error });
+    }
+};
+
 const getOrders = async (req, res) => {
     try {
         await orderHelper
@@ -96,6 +113,7 @@ const updateOrder = async (req, res) => {
 module.exports = {
     createOrder: createOrder,
     viewOrders: viewOrders,
+		viewOrderDetail: viewOrderDetail,
     getOrders: getOrders,
     deleteOrder: deleteOrder,
     updateOrder: updateOrder

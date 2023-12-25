@@ -4,8 +4,8 @@ const addCategory = (data) => {
 	return new Promise(async (resolve, reject) => {
 		const findCategory = await Category.findOne({ categoryName: data.categoryName });
 		if (findCategory) {
-			console.log("Thể loại sản phẩm đã tồn tại!");
-			return reject("Thể loại sản phẩm đã tồn tại");
+			console.log("Product category already exists!");
+			return reject("Product category already exists!");
 		} else {
 			const newData = {
 				categoryName: data.categoryName,
@@ -47,7 +47,7 @@ const editCategory = (data) => {
 					return reject(error);
 				});
 		} else {
-			return reject("Thể loại sản phẩm không tồn tại!");
+			return reject("Product category does not exist!");
 		}
 	});
 };
@@ -58,7 +58,7 @@ const findAll = () => {
 		if (findCategory) {
 			return resolve(findCategory);
 		} else {
-			return reject("Kho dữ liệu trống!");
+			return reject("The database is empty!");
 		}
 	});
 };
@@ -69,7 +69,7 @@ const findCategory = (categoryID) => {
 		if (findCategory) {
 			return resolve(findCategory);
 		} else {
-			return reject("Kho dữ liệu trống!");
+			return reject("The database is empty!");
 		}
 	});
 };

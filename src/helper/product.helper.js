@@ -6,8 +6,8 @@ const addProduct = (data) => {
 		const findProduct = await Product.findOne({ productName: data.productName });
 		console.log(data)
 		if (findProduct) {
-			console.log("Sản phẩm đã tồn tại!");
-			return reject("Sản phẩm đã tồn tại");
+			console.log("Product already exists!");
+			return reject("Product already exists!");
 		} else {
 			const newData = {
 				productName: data.productName,
@@ -60,7 +60,7 @@ const updateProduct = (data) => {
 					return reject(error);
 				});
 		} else {
-			return reject("Sản phẩm không tồn tại!");
+			return reject("Product does not exist!");
 		}
 	});
 };
@@ -69,9 +69,9 @@ const deleteProduct = (productID) => {
 	return new Promise(async (resolve, reject) => {
 		const findProduct = await Product.findByIdAndDelete(productID);
 		if (findProduct) {
-			return resolve("Xóa sản phẩm thành công!");
+			return resolve("Product deletion successful!");
 		} else {
-			return reject("Sản phẩm không tồn tại!");
+			return reject("Product does not exist!");
 		}
 	});
 };
@@ -84,7 +84,7 @@ const findAll = () => {
 	  if (findProduct) {
 		return resolve({findProduct, findComment});
 	  } else {
-		return reject("Kho dữ liệu trống!");
+		return reject("The database is empty!");
 	  }
 	});
   };
@@ -96,7 +96,7 @@ const findProduct = (productID) => {
 		if (findProduct) {
 			return resolve({findProduct, findComment});
 		} else {
-			return reject("Kho dữ liệu trống!");
+			return reject("The database is empty!");
 		}
 	});
 };
@@ -109,7 +109,7 @@ const findProductByCategory = (categoryID) => {
 		if (filtering) {
 			return resolve({filtering, findComment});
 		} else {
-			return reject("Sản phẩm không tồn tại!");
+			return reject("Product does not exist!");
 		}
 	})
 }
@@ -123,7 +123,7 @@ const searchProducts = (search) => {
 		if (searching.length > 0) {
 			return resolve({searching, findComment});
 		} else {
-			return reject("Không tìm thấy sản phẩm!");
+			return reject("Product not found!");
 		}
 	})
 }

@@ -49,7 +49,7 @@ const editBrand = (data) => {
 					return reject(error);
 				});
 		} else {
-			return reject("Nhãn hiệu không tồn tại!");
+			return reject("Brand does not exist!");
 		}
 	});
 };
@@ -60,7 +60,7 @@ const findAll = () => {
 		if (findBrand) {
 			return resolve(findBrand);
 		} else {
-			return reject("Kho dữ liệu trống!");
+			return reject("The database is empty!");
 		}
 	});
 };
@@ -71,7 +71,7 @@ const findBrand = (brandID) => {
 		if (findBrand) {
 			return resolve(findBrand);
 		} else {
-			return reject("Kho dữ liệu trống!");
+			return reject("The database is empty!");
 		}
 	});
 };
@@ -82,7 +82,7 @@ const deleteBrand = (brandID) => {
 		if (findBrand) {
 			return resolve(findAll());
 		} else {
-			return reject("Nhãn hiệu không tồn tại!");
+			return reject("Brand does not exist!");
 		}
 	});
 };

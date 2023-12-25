@@ -4,6 +4,7 @@ const User = require("../controller/user.controller");
 const { verifyToken, requiredSignIn, isStaff } = require("../middleware/auth")
 
 router.post("/register", requiredSignIn, verifyToken, User.register);
+router.post("/user-register", User.register);
 router.post("/sign-in", User.login);
 router.get("/user-list", requiredSignIn, isStaff, User.findAll);
 router.get("/view-profile", requiredSignIn, User.viewProfile);

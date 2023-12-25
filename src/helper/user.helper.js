@@ -6,8 +6,8 @@ const register = (data) => {
 	return new Promise(async (resolve, reject) => {
 		const findUser = await User.findOne({ email: data.email });
 		if (findUser) {
-			console.log("Email đã tồn tại!");
-			return reject("Email đã tồn tại");
+			console.log("Email already exists!");
+			return reject("Email already exists!");
 		} else {
 			const saltPassword = await User.hashPassword(data.password);
 			const newData = {
@@ -39,11 +39,11 @@ const login = (email, password) => {
 			password,
 			findUser.password
 		)) {
-			console.log("Xác thực thất bại. Email hoặc mật khẩu không đúng!");
-			return reject("Xác thực thất bại. Email hoặc mật khẩu không đúng!");
+			console.log("Authentication failed. Email or password is incorrect!");
+			return reject("Authentication failed. Email or password is incorrect!");
 		} else {
 			const accessToken = createToken(email, findUser._id, findUser.role);
-			console.log("Login thành công!");
+			console.log("Login successful!");
 			return resolve(accessToken);
 		}
 	});
@@ -55,7 +55,7 @@ const findAll = () => {
 		if (findUsers) {
 			return resolve(findUsers);
 		} else {
-			return reject("Kho dữ liệu trống!");
+			return reject("The database is empty!");
 		}
 	});
 };
@@ -67,7 +67,7 @@ const viewProfile = (userID) => {
 		if (findUser) {
 			return resolve(findUser);
 		} else {
-			return reject("Không có dữ liệu của người dùng này!");
+			return reject("There is no data for this user!");
 		}
 	});
 };
@@ -99,7 +99,7 @@ const updateUser = (data) => {
 					return reject(error);
 				});
 		} else {
-			return reject("Người dùng không tồn tại!");
+			return reject("User does not exist!");
 		}
 	});
 };
@@ -113,7 +113,7 @@ const changePass = (user, data) => {
 
 			if (!isMatch) {
 				// Return an error if the current password is incorrect
-				return reject("Mật khẩu cũ không đúng!");
+				return reject("Old password is incorrect!");
 			}
 
 			const saltPassword = await User.hashPassword(data.newPass);
@@ -122,7 +122,7 @@ const changePass = (user, data) => {
 			await findUser.save();
 			return resolve(findUser)
 		} else { 
-			return reject("Người dùng không tồn tại!");
+			return reject("User does not exist!");
 		}
 	});
 };
@@ -133,7 +133,7 @@ const deleteUser = (userID) => {
 		if (findUser) {
 			return resolve(findAll());
 		} else {
-			return reject("Người dùng không tồn tại!");
+			return reject("User does not exist!");
 		}
 	});
 };

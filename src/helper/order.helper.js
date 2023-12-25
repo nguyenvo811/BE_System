@@ -34,6 +34,17 @@ const viewOrders = (user) => {
     });
 };
 
+const viewOrderDetail = (orderID) => {
+	return new Promise(async (resolve, reject) => {
+			const findOrder = await Order.findOne({ _id: orderID }).populate("orderDetail.product").populate("user");
+			if (findOrder) {
+					return resolve(findOrder);
+			} else {
+					return reject("there is empty");
+			}
+	});
+};
+
 const getOrders = () => {
     return new Promise(async (resolve, reject) => {
         const findOrder = await Order.find().populate("orderDetail.product").populate("user", "fullName");
@@ -84,6 +95,7 @@ const updateOrder = (data) => {
 module.exports = {
     createOrder: createOrder,
     viewOrders: viewOrders,
+	viewOrderDetail: viewOrderDetail,
     getOrders: getOrders,
     deleteOrder: deleteOrder,
     updateOrder: updateOrder
